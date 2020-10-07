@@ -1,24 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import TextInput from './components/textInput';
+import RadioButtons from './components/radioButtons';
+import CheckBox from './components/checkBox';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  
+  return(
+    <div>
+      <label htmlFor="questions">Choose a question type:</label>
+      <select name="questions" id="questions">
+        <option value="textInput">Text Input</option>
+        <option value="radioButton">Radio Buttons</option>
+        <option value="checkBox">Check boxes</option>
+      </select>
     </div>
   );
 }
