@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function TextInput(){
-
-    console.log("hi");
-
+function TextInput(props){
+    console.log(props);
     return(
         <div>
-            <label>enter:</label>
+            <label>{props.question}</label>
             <input type="text"/>
         </div>
     );
