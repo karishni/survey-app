@@ -14,7 +14,12 @@ function App() {
 
   const addQuestion=(event)=>{
     event.preventDefault();
-    setQuestion(question.concat(ques));
+    //setQuestion(question.concat(ques));
+    setQuestion([...question, 
+      {
+        question: ques,
+        type: questionType
+      }])
     console.log(question);
   }
 
@@ -44,7 +49,10 @@ function App() {
     
     <div className="preview">
         {question.map((item)=>(
-          <div>{item}</div>
+          <div>
+          <div>{item.question}</div>
+          <div>{item.type === QuestionTypes[0].value ? <input type="text" /> : null}</div>
+          </div>
         ))}
         
     </div>
