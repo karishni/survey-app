@@ -10,6 +10,10 @@ const QuestionTypes=[
     {
         value: "radioButtons",
         label: "Single correct multiple options"
+    },
+    {
+        value: "checkBox",
+        label: "Multiple correct multiple options"
     }
 ]
 
