@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import QuestionTypes from './components/questionTypes';
+import RadioButtons from './components/radioButtons';
 //import InsertTextInput,{ TextInputToPreview } from './editor components/insertTextInput';
 
 function App() {
@@ -50,8 +51,10 @@ function App() {
     <div className="preview">
         {question.map((item)=>(
           <div>
-          <div>{item.question}</div>
-          <div>{item.type === QuestionTypes[0].value ? <input type="text" /> : null}</div>
+          <div key={item.question}>{item.question}</div>
+          <div>{item.type === QuestionTypes[0].value ? <TextField variant="outlined" placeholder="Your Answer"/> : null}</div>
+          <div>{item.type === QuestionTypes[1].value ? <TextField variant="outlined" multiline rows={4} placeholder="Your Answer"/> : null}</div>
+          <div>{item.type === QuestionTypes[2].value ?  : null}</div>
           </div>
         ))}
         
