@@ -1,15 +1,36 @@
+.container{
+  display: flex;
+  flex-direction: row;
+}
 .editor{
-  width: 50%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  text-align: center;
+  width: 45%;
+  height: 700px;
+  margin: 15px;
+  border-radius: 10px;
+  border: grey solid;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .preview{
-  width: 50%;
+  width: 45%;
+  height: 700px;
+  margin: 15px;
+  border: grey solid;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ed-con{
+  padding: 10px;
   height: 100%;
-  position: fixed;
-  right: 0;
-  text-align: center;
+}
+
+.new-btn{
+  margin-left: 400px;
 }
