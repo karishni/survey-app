@@ -5,12 +5,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import QuestionTypes from './components/questionTypes';
 import RadioButtons from './components/radioButtons';
-//import InsertTextInput,{ TextInputToPreview } from './editor components/insertTextInput';
 
 function App() {
   const [ question,setQuestion ] = useState([]);
   const [ ques,setQues ] = useState('');
   const [ questionType,setQuestionType ] = useState('');
+  const [ radioOptions, setRadioOptions ] = useState('');
+  const [ radioArr, setRadioArr ] = useState([]);
   
 
   const addQuestion=(event)=>{
@@ -22,6 +23,26 @@ function App() {
         type: questionType
       }])
     console.log(question);
+  }
+
+  const handleRadioOptions=(event)=>{
+    event.preventDefault();
+    setRadioArr([...radioArr, radioOptions]);
+    console.log(radioArr);
+  }
+
+  const radioEditor=()=>{
+    if(questionType === QuestionTypes[2].value){
+      return(
+        <div>
+          <label>Enter your options:</label>
+          <input type="text" onChange={event => setRadioOptions(event.target.value)}/>
+          <Button onClick={handleRadioOptions}>
+            Add Option
+          </Button>
+        </div>
+      )
+    }
   }
 
   return(
@@ -44,6 +65,7 @@ function App() {
               {option.label}
             </MenuItem>))}
         </TextField><br/>
+        {radioEditor()}
         <input type="submit" value="add"/>
       </form>
     </div>
@@ -54,7 +76,7 @@ function App() {
           <div key={item.question}>{item.question}</div>
           <div>{item.type === QuestionTypes[0].value ? <TextField variant="outlined" placeholder="Your Answer"/> : null}</div>
           <div>{item.type === QuestionTypes[1].value ? <TextField variant="outlined" multiline rows={4} placeholder="Your Answer"/> : null}</div>
-          <div>{item.type === QuestionTypes[2].value ?  : null}</div>
+          <div>{item.type === QuestionTypes[2].value ? <RadioButtons options={radioArr}/> : null}</div>
           </div>
         ))}
         
