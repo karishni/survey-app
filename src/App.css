@@ -1,28 +1,39 @@
 .container{
+  border-radius: 10px;
+  border: grey solid;
+  margin: 10px;
+}
+
+.container2{
   display: flex;
   flex-direction: row;
 }
+
 .editor{
-  width: 45%;
-  height: 700px;
+  width: 50%;
   margin: 15px;
-  border-radius: 10px;
-  border: grey solid;
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.create{
+  width: 50%;
+}
+
+.prev{
+  width: 50%;
+  
+}
+
 .preview{
-  width: 45%;
-  height: 700px;
+  width: 50%;
   margin: 15px;
-  border: grey solid;
   padding: 20px;
-  border-radius: 10px;
   display: flex;
   flex-direction: column;
+  background-color: cornflowerblue;
   /* align-items: center; */
 }
 
@@ -50,6 +61,10 @@ h1{
   padding: 10px;
 }
 
-.new-btn{
-  margin-left: 400px;
+.btn{
+  align-items: center;
 }
+
+/* .new-btn{
+  margin-left: 400px;
+} */

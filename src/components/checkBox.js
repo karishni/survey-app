@@ -7,13 +7,17 @@ export default function CheckBox(props){
     return(
         <div>
         {props.options.map((option)=>(
-            <FormGroup>
-                <FormControlLabel
-                    control={<Checkbox color="primary" name="checkedA" />}
-                    label={option}
-                />
-            </FormGroup>
+            <div>
+            <input type="checkbox"/>
+            <label>{option}</label>
+            </div>
         ))}
         </div>
     )
 }
+{/* <FormGroup>
+                <FormControlLabel
+                    control={<Checkbox color="primary" name="checkedA" />}
+                    label={option}
+                />
+            </FormGroup> */}
