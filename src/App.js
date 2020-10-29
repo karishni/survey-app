@@ -6,24 +6,26 @@ import Button from '@material-ui/core/Button';
 import QuestionTypes from './components/questionTypes';
 import RadioButtons from './components/radioButtons';
 import CheckBox from './components/checkBox';
-import { makeStyles } from '@material-ui/core/styles';
+import { IconButton } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
+//import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& .MuiTextField-root': {
-      margin: theme.spacing(2),
-      width: '40ch',
-    },
-  },
-  input: {
-    '& .MuiInputBase-input': {
-      width: '20ch',
-    }
-  },
-  buttonMargin: {
-    margin: '10px',
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     '& .MuiTextField-root': {
+//       margin: theme.spacing(2),
+//       width: '40ch',
+//     },
+//   },
+//   input: {
+//     '& .MuiInputBase-input': {
+//       width: '20ch',
+//     }
+//   },
+//   buttonMargin: {
+//     margin: '10px',
+//   },
+// }));
 
 function App(){
   const [ count, setCount ] = useState(2);
@@ -52,7 +54,7 @@ function App(){
 
 function Form(props) {
   //console.log(props);
-  const classes = useStyles();
+  //const classes = useStyles();
   const [ question,setQuestion ] = useState({});
   const [ ques,setQues ] = useState('');
   const [ questionType,setQuestionType ] = useState('');
@@ -68,6 +70,7 @@ function Form(props) {
     event.preventDefault();
     setQuestion( 
       {
+        brac: ')',
         number: props.count,
         question: ques,
         type: questionType
@@ -89,12 +92,12 @@ function Form(props) {
   const radioEditor=()=>{
     if(questionType === QuestionTypes[2].value){
       return(
-        <div>
-          <label>Enter your options:</label><br/>
-          <TextField className={classes.input} margin="dense" value={radioOptions} placeholder="Enter option" onChange={event => setRadioOptions(event.target.value)}/><br/>
-          <Button onClick={handleRadioOptions} color="primary" variant="outlined" className={classes.buttonMargin}>
-            Add Option
-          </Button>
+        <div className="container2">
+          <label className="enter-ques">Enter options: </label>
+          <TextField margin="dense" value={radioOptions} placeholder="Enter option" onChange={event => setRadioOptions(event.target.value)}/>
+          <IconButton size="small" onClick={handleRadioOptions} color="primary" variant="outlined">
+            <AddIcon/>
+          </IconButton>
         </div>
       )
     }
@@ -106,12 +109,12 @@ function Form(props) {
   const checkBoxEditor=()=>{
     if(questionType === QuestionTypes[3].value){
       return(
-        <div>
-          <label>Enter options: </label><br/>
-          <TextField className={classes.input} margin="dense" value={checkOptions} placeholder="Enter Option" onChange={event => setCheckOptions(event.target.value)}/>
-          <Button onClick={handleCheckOptions} color="primary" variant="outlined" className={classes.buttonMargin}>
-            Add Option
-          </Button>
+        <div className="container2">
+          <label className="enter-ques">Enter options: </label>
+          <TextField margin="dense" value={checkOptions} placeholder="Enter Option" onChange={event => setCheckOptions(event.target.value)}/>
+          <IconButton size="small" onClick={handleCheckOptions} color="primary" variant="outlined">
+            <AddIcon/>
+          </IconButton>
         </div>
       )
     }
@@ -131,10 +134,13 @@ function Form(props) {
     <div className="container2">
     <div className="editor">
       <div>
-      <form onSubmit={addQuestion} noValidate autoComplete="off" className={classes.root}>
-        <label htmlFor={ques}>Enter your question: </label><br/>
+      <form onSubmit={addQuestion} noValidate autoComplete="off">
+        <div className="container2">
+        <label className="enter-ques" htmlFor={ques}>Enter your question: </label>
         <TextField margin="dense" id={ques} value={ques} placeholder="Enter your Question" onChange={event => setQues(event.target.value)}/><br/>
-        <label>Select the type of question you want: </label><br/>
+        </div>
+        <div className="container2">
+        <label className="enter-ques">Select the question type: </label>
         <TextField
           id="."
           select
@@ -150,6 +156,7 @@ function Form(props) {
               {option.label}
             </MenuItem>))}
         </TextField><br/>
+        </div>
         {radioEditor()}
         {checkBoxEditor()}
         <Button type="submit" className="btn" color="primary" variant="contained">
@@ -161,13 +168,12 @@ function Form(props) {
     
     <div className="preview">
       <div className="pre-con">
-        {/* <h1>PREVIEW YOUR FORM!</h1> */}
-   <form className={classes.root} onSubmit={liveEdit}>
-   <div className="question" htmlFor={question.question}>{question.number} {question.question}</div>
-   <div>{question.type === QuestionTypes[0].value ? <div><TextField margin="dense" placeholder="Your Answer"/><button type="submit">Edit</button></div> : null}</div>
-   <div>{question.type === QuestionTypes[1].value ? <div><TextField variant="outlined" multiline rows={4} placeholder="Your Answer"/><button type="submit">Edit</button></div> : null}</div>
-   <div>{question.type === QuestionTypes[2].value ? <div><RadioButtons options={radioArr}/><button type="submit">Edit</button></div> : null}</div>
-   <div>{question.type === QuestionTypes[3].value ? <div><CheckBox options={checkArr}/><button type="submit">Edit</button></div> : null}</div>
+   <form onSubmit={liveEdit}>
+   <div className="question" htmlFor={question.question}>{question.number}{question.brac} {question.question}</div>
+   <div>{question.type === QuestionTypes[0].value ? <div><TextField fullWidth margin="dense" placeholder="Your Answer"/></div> : null}</div>
+   <div>{question.type === QuestionTypes[1].value ? <div><TextField fullWidth variant="outlined" multiline rows={4} placeholder="Your Answer"/></div> : null}</div>
+   <div>{question.type === QuestionTypes[2].value ? <div><RadioButtons options={radioArr}/></div> : null}</div>
+   <div>{question.type === QuestionTypes[3].value ? <div><CheckBox options={checkArr}/></div> : null}</div>
    </form>
       </div>
     </div>

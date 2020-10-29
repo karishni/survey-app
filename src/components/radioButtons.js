@@ -17,8 +17,9 @@ export default function RadioButtons(props){
         <div>
         {props.options.map((option)=>(
             <div>
-            <input type="radio"/>
-            <label>{option}</label>
+              <RadioGroup>
+                <FormControlLabel className={classes.noMargin} value="end" control={<Radio color="primary" />} key={option} label={option} />
+            </RadioGroup>
             </div>
         ))}
         </div>
@@ -27,3 +28,5 @@ export default function RadioButtons(props){
 {/* <RadioGroup>
                 <FormControlLabel className={classes.noMargin} value="end" control={<Radio color="primary" />} key={option} label={option} />
             </RadioGroup> */}
+            // <input type="radio"/>
+            // <label>{option}</label>
