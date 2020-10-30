@@ -17,16 +17,16 @@ export default function RadioButtons(props){
         <div>
         {props.options.map((option)=>(
             <div>
-              <RadioGroup>
-                <FormControlLabel className={classes.noMargin} value="end" control={<Radio color="primary" />} key={option} label={option} />
+              <RadioGroup key={option}>
+                <FormControlLabel className={classes.noMargin} value="end" control={<Radio color="primary" />} label={option} />
             </RadioGroup>
             </div>
         ))}
         </div>
     )
 }
-{/* <RadioGroup>
-                <FormControlLabel className={classes.noMargin} value="end" control={<Radio color="primary" />} key={option} label={option} />
-            </RadioGroup> */}
+//* <RadioGroup>
+               // <FormControlLabel className={classes.noMargin} value="end" control={<Radio color="primary" />} key={option} label={option} />
+            //</RadioGroup> */
             // <input type="radio"/>
             // <label>{option}</label>

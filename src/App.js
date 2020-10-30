@@ -8,6 +8,7 @@ import RadioButtons from './components/radioButtons';
 import CheckBox from './components/checkBox';
 import { IconButton } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 //import { makeStyles } from '@material-ui/core/styles';
 
 // const useStyles = makeStyles((theme) => ({
@@ -27,7 +28,7 @@ import AddIcon from '@material-ui/icons/Add';
 //   },
 // }));
 
-function App(){
+export default function App(){
   const [ count, setCount ] = useState(2);
   const [ number, setNumber ] = useState([1]);
   const newQuestion=(event)=>{
@@ -44,7 +45,7 @@ function App(){
       </div>
       <div>
        {number.map((no)=>(
-      <Form count={no}/>
+      <Form key={no} count={no}/>
     ))}
       <div className="new-btn"><Button onClick={newQuestion} color="secondary" variant="outlined">New Question</Button></div>
       </div>
@@ -53,17 +54,14 @@ function App(){
 }
 
 function Form(props) {
-  //console.log(props);
-  //const classes = useStyles();
+
   const [ question,setQuestion ] = useState({});
   const [ ques,setQues ] = useState('');
   const [ questionType,setQuestionType ] = useState('');
   const [ radioOptions, setRadioOptions ] = useState('');
   const [ radioArr, setRadioArr ] = useState([]);
-  //const [ innerArr, setInnerArr ] = useState([]);
   const [ checkOptions, setCheckOptions ] = useState('');
   const [ checkArr, setCheckArr ] = useState([]);
-  //const [ count, setCount ] = useState(1);
   
 
   const addQuestion=(event)=>{
@@ -89,15 +87,44 @@ function Form(props) {
     setCheckOptions('');
   }
 
+  const removeRadioOpt=(event)=>{
+    console.log(event.target.name);
+    for(var i = 0; i<=radioArr.length; i++){
+      if(radioArr[i] === event.target.name){
+        radioArr.splice(i, 1);
+      }
+    }
+  }
+
+  const removeCheckOpt=(event)=>{
+    console.log(event.target.name);
+    for(var i = 0; i<=checkArr.length; i++){
+      if(checkArr[i] === event.target.name){
+        checkArr.splice(i, 1);
+    }
+  }
+}
   const radioEditor=()=>{
     if(questionType === QuestionTypes[2].value){
       return(
+        <div>
         <div className="container2">
           <label className="enter-ques">Enter options: </label>
           <TextField margin="dense" value={radioOptions} placeholder="Enter option" onChange={event => setRadioOptions(event.target.value)}/>
           <IconButton size="small" onClick={handleRadioOptions} color="primary" variant="outlined">
             <AddIcon/>
           </IconButton>
+        </div>
+        <div className="options">
+          {radioArr.map((opt)=>(
+            <span key={opt} className="single-opt">
+              {opt}
+              <button className="remove-btn" name={opt} onClick={removeRadioOpt}>
+                x
+                </button>
+            </span>
+          ))}
+        </div>
         </div>
       )
     }
@@ -109,12 +136,24 @@ function Form(props) {
   const checkBoxEditor=()=>{
     if(questionType === QuestionTypes[3].value){
       return(
+        <div>
         <div className="container2">
           <label className="enter-ques">Enter options: </label>
           <TextField margin="dense" value={checkOptions} placeholder="Enter Option" onChange={event => setCheckOptions(event.target.value)}/>
           <IconButton size="small" onClick={handleCheckOptions} color="primary" variant="outlined">
             <AddIcon/>
           </IconButton>
+        </div>
+        <div className="options">
+          {checkArr.map((opt)=>(
+            <span key={opt} className="single-opt">
+              {opt}
+              <button onClick={removeCheckOpt} className="remove-btn" name={opt}>
+                x
+              </button>
+            </span>
+          ))}
+        </div>
         </div>
       )
     }
@@ -159,7 +198,7 @@ function Form(props) {
         </div>
         {radioEditor()}
         {checkBoxEditor()}
-        <Button type="submit" className="btn" color="primary" variant="contained">
+        <Button type="submit" className="add-btn" color="primary" variant="contained">
           Add Question
         </Button>
       </form>
@@ -170,7 +209,7 @@ function Form(props) {
       <div className="pre-con">
    <form onSubmit={liveEdit}>
    <div className="question" htmlFor={question.question}>{question.number}{question.brac} {question.question}</div>
-   <div>{question.type === QuestionTypes[0].value ? <div><TextField fullWidth margin="dense" placeholder="Your Answer"/></div> : null}</div>
+   <div>{question.type === QuestionTypes[0].value ? <div><TextField fullWidth variant="outlined" margin="dense" placeholder="Your Answer"/></div> : null}</div>
    <div>{question.type === QuestionTypes[1].value ? <div><TextField fullWidth variant="outlined" multiline rows={4} placeholder="Your Answer"/></div> : null}</div>
    <div>{question.type === QuestionTypes[2].value ? <div><RadioButtons options={radioArr}/></div> : null}</div>
    <div>{question.type === QuestionTypes[3].value ? <div><CheckBox options={checkArr}/></div> : null}</div>
@@ -180,20 +219,3 @@ function Form(props) {
     </div>
   );
 }
-export default App;
-
-// {/* {question.map((item)=>( */}
-//   <form className={classes.root} htmlFor={item.number}>
-//   <div className="question" value={item.question} key={item.number} id={item.number}>{item.number}) {item.question}</div>
-//   <div>{item.type === QuestionTypes[0].value ? <TextField margin="dense" placeholder="Your Answer"/> : null}</div>
-//   <div>{item.type === QuestionTypes[1].value ? <TextField variant="outlined" multiline rows={4} placeholder="Your Answer"/> : null}</div>
-//   <div>{item.type === QuestionTypes[2].value ? <RadioButtons options={radioArr}/> : null}</div>
-//   <div>{item.type === QuestionTypes[3].value ? <CheckBox options={checkArr}/> : null}</div>
-//   <button name={item.question}>Edit</button>
-//   </form>
-// {/* ))} */}
-{/* <div className="new-btn"><Button onClick={newQuestion} color="secondary" variant="outlined">New Question</Button></div> */}
-// const newQuestion=()=>{
-//   setQues('');
-//   setQuestionType('');
-// }

@@ -7,7 +7,7 @@ export default function CheckBox(props){
     return(
         <div>
         {props.options.map((option)=>(
-            <div>
+            <div key={option}>
             <FormGroup>
                 <FormControlLabel control={<Checkbox color="primary" name="checkedA"/>} label={option}/>
             </FormGroup>
@@ -16,11 +16,11 @@ export default function CheckBox(props){
         </div>
     )
 }
-{/* <FormGroup>
-                <FormControlLabel
-                    control={<Checkbox color="primary" name="checkedA" />}
-                    label={option}
-                />
-            </FormGroup> */}
+//* <FormGroup>
+            //     <FormControlLabel
+            //         control={<Checkbox color="primary" name="checkedA" />}
+            //         label={option}
+            //     />
+            // </FormGroup> */
             // <input type="checkbox"/>
             // <label>{option}</label>
