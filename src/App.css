@@ -38,12 +38,12 @@
   background-color: rgb(186, 221, 221);
   border-radius: 10px;
   margin-bottom: -15px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
 }
 
 h1{
   text-align: center;
-  font-size: 40px;
+  font-size: 3vw;
   margin-top: 20px;
   margin-bottom: 50px;
   offset: none;
@@ -54,7 +54,7 @@ h1{
 }
 
 .question{
-  font-size: 22px;
+  font-size: 20px;
   margin-bottom: 10px;
 }
 
@@ -102,6 +102,6 @@ h1{
   margin: 10px;
 }
 
-/* .new-btn{
-  margin-left: 400px;
-} */
+.req{
+  color: red;
+}

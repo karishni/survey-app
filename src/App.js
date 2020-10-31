@@ -8,6 +8,8 @@ import RadioButtons from './components/radioButtons';
 import CheckBox from './components/checkBox';
 import { IconButton } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 //import { makeStyles } from '@material-ui/core/styles';
 
@@ -62,7 +64,9 @@ function Form(props) {
   const [ radioArr, setRadioArr ] = useState([]);
   const [ checkOptions, setCheckOptions ] = useState('');
   const [ checkArr, setCheckArr ] = useState([]);
-  
+  const [ req, setReq ] = useState({
+    checkedA: false,
+  });
 
   const addQuestion=(event)=>{
     event.preventDefault();
@@ -162,6 +166,10 @@ function Form(props) {
     }
   }
 
+  const handleRequired=(event)=>{
+    setReq({...req, [event.target.name]: event.target.checked });
+  }
+
 
   const liveEdit=(event)=>{
     event.preventDefault();
@@ -174,12 +182,12 @@ function Form(props) {
     <div className="editor">
       <div>
       <form onSubmit={addQuestion} noValidate autoComplete="off">
-        <div className="container2">
+        <div className="contain2">
         <label className="enter-ques" htmlFor={ques}>Enter your question: </label>
         <TextField margin="dense" id={ques} value={ques} placeholder="Enter your Question" onChange={event => setQues(event.target.value)}/><br/>
         </div>
         <div className="container2">
-        <label className="enter-ques">Select the question type: </label>
+        <label className="enter-ques">Select question type: </label>
         <TextField
           id="."
           select
@@ -198,6 +206,10 @@ function Form(props) {
         </div>
         {radioEditor()}
         {checkBoxEditor()}
+        <FormControlLabel
+        control={<Switch checked={req.checkedA} onChange={handleRequired} name="checkedA" />}
+        label="Required"
+      />
         <Button type="submit" className="add-btn" color="primary" variant="contained">
           Add Question
         </Button>
@@ -208,7 +220,8 @@ function Form(props) {
     <div className="preview">
       <div className="pre-con">
    <form onSubmit={liveEdit}>
-   <div className="question" htmlFor={question.question}>{question.number}{question.brac} {question.question}</div>
+   <div className="question" htmlFor={question.question}>{question.number}{question.brac} {question.question}
+        {req.checkedA ? <span className="req">*</span> : null}</div>
    <div>{question.type === QuestionTypes[0].value ? <div><TextField fullWidth variant="outlined" margin="dense" placeholder="Your Answer"/></div> : null}</div>
    <div>{question.type === QuestionTypes[1].value ? <div><TextField fullWidth variant="outlined" multiline rows={4} placeholder="Your Answer"/></div> : null}</div>
    <div>{question.type === QuestionTypes[2].value ? <div><RadioButtons options={radioArr}/></div> : null}</div>
